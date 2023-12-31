@@ -1,0 +1,42 @@
+.form__box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form__button {
+    margin: 10px;
+}
+
+fieldset {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+input {
+    margin: 10px;
+    width: 200px;
+}
+textarea {
+    margin: 10px;
+    width: 200px;
+    height: 140px;
+}
+
+.base__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.education__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+}

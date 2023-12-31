@@ -1,0 +1,70 @@
+.preview__cv{
+    margin: 20px;
+    background-color: white;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    color: black;
+}
+
+.baseInfo {
+    display: grid;
+    grid-template-areas:
+    "name name name contact"
+    "name name name contact"
+    "name name name contact";
+
+    width: 100%;
+}
+
+.base__name{
+    grid-area: name;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    border-bottom: 2px solid blue;
+    border-right: 2px solid blue;
+}
+
+.base__contact{
+    grid-area: contact;
+    font-size: 20px;
+    margin: 0;
+}
+
+
+.workExp {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+.workExp__item {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.title {
+    border-bottom: 1px solid black;
+}
+
+
+.Inputs {
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.appended {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+    margin: 10px;
+}

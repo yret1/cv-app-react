@@ -2,6 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
+    padding: 5px;
 }
 
 .form__button {
@@ -19,6 +21,12 @@ fieldset {
 input {
     margin: 10px;
     width: 200px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    &:focus {
+        border: 2px solid blue;
+    }
 }
 textarea {
     margin: 10px;

@@ -1,5 +1,16 @@
 import BaseInfoEditor from "../Editor/BaseInfoEditor"
 import WorkInfoEditor from "../Editor/WorkInfoEditor";
+import CVRender from "./Printable";
+import html2pdf from 'html2pdf.js';
+
+
+import EduIcon from "../assets/EduIcon.svg"
+import WorkIcon from "../assets/WorkIcon.svg"
+import PhoneIcon from "../assets/PhoneIcon.svg"
+import EmailIcon from "../assets/EmailIcon.svg"
+import HomeIcon from "../assets/HomeIcon.svg"
+import LocationIcon from "../assets/LocationIcon.svg"
+
 import {useState, useEffect} from "react"
 
 import "./Content.css"
@@ -28,6 +39,9 @@ const Content = (props) => {
     const [phoneInfo, setPhoneInfo] = useState("");
     const [addressInfo, setAddressInfo] = useState("");
     const [cityInfo, setCityInfo] = useState("");
+    const [descInfo, setDescInfo] = useState("");
+    const [currentRole, setCurrentRole] = useState("");
+
 
 
     //work experience
@@ -49,111 +63,104 @@ const Content = (props) => {
         setEducationArr(newArr);
     }
 
+    const handlePrint = () => {
+        const content = document.getElementById('printable');
+        content.style.padding = '0';
+        content.style.margin = '0';
+        content.style.width = "100%";
+        content.style.height = "100%";
+        const options = {format: 'a4', orientation: 'portrait', filename: "CV.pdf" };
 
+        html2pdf(content, options);
 
+        setTimeout(() => {
+            resetStyle();
+        }, 500);
+
+    }
+
+    const resetStyle = () => {
+        const content = document.getElementById('printable');
+        content.style.padding = '';
+        content.style.margin = '';
+        content.style.width = "";
+        content.style.height = "";
+
+    }
 
 
 
     return(
         <>
-          <section className="Inputs">
-             <BaseInfoEditor 
-        setName={setNameInfo}
-        setEmail={setEmailInfo}
-        setPhone={setPhoneInfo}
-        setAddress={setAddressInfo}
-        setCity={setCityInfo}
-         />
-            <WorkInfoEditor 
-        setWorkArr={setWorkArr} 
-        currentArr={workArr} 
-        maxYear={year}
-        minYear={minYear}
-        />
+            <section className="Inputs">
+                    <BaseInfoEditor 
+                setName={setNameInfo}
+                setEmail={setEmailInfo}
+                setPhone={setPhoneInfo}
+                setAddress={setAddressInfo}
+                setCity={setCityInfo}
+                setDesc={setDescInfo}
+                setRole={setCurrentRole}
+                />
+                    <WorkInfoEditor 
+                setWorkArr={setWorkArr} 
+                currentArr={workArr} 
+                maxYear={year}
+                minYear={minYear}
+                />
 
-        <EducationInfoEditor
-        setArr={setEducationArr}
-        currentArr={educationArr}
-        maxYear={year}
-        minYear={minYear} />
+                <EducationInfoEditor
+                setArr={setEducationArr}
+                currentArr={educationArr}
+                maxYear={year}
+                minYear={minYear} />
 
-        </section>
+            </section>
 
-        <section className="edit__delete">
-            <div className="workstuff">
-                {workArr.length > 0 && <h2>Edit Work Experience</h2>}
-                {workArr.length > 0 && workArr.map((item) => (
-                    <div className="appended" key={item.company}>
-                        <h3>{item.company +" " + "/" + " " + item.position}</h3>
-                        <button onClick={deleteWorkEntry} className="remove">Delete Entry</button>
-                    </div>
-                ))}
-            </div>
-            <div className="edustuff">
-                {educationArr.length > 0 && <h2>Edit Education</h2>}
-                {educationArr.length > 0 && educationArr.map((item) => (
-                    <div className="appended" key={item.school}>
-                        <h3>{item.school +" " + "/" + " " + item.degree}</h3>
-                        <button onClick={deleteEduEntry} className="remove">Delete Entry</button>
-                    </div>
-                ))}
-            </div>
-        </section>
-
-        <section>
-            <h1>Check Out Your CV Below</h1>
-        </section>
-
-        <section className="preview__cv">
-            <div className="baseInfo">
-                <div className="base__name">
-                <h2>{nameInfo || "John Doe"}</h2>
+            <section className="edit__delete">
+                <div className="workstuff">
+                    {workArr.length > 0 && <h2>Edit Work Experience</h2>}
+                    {workArr.length > 0 && workArr.map((item) => (
+                        <div className="appended" key={item.company}>
+                            <h3>{item.company +" " + "/" + " " + item.position}</h3>
+                            <button onClick={deleteWorkEntry} className="remove">Delete Entry</button>
+                        </div>
+                    ))}
                 </div>
-                <div className="base__contact">
-                    <p>{emailInfo || "test1234@email.com"}</p>
-                    <p>{phoneInfo || "123456789"}</p>
-                    <p>{addressInfo || "1234 Street"}</p>
-                    <p>{cityInfo || "Some City"}</p>
+                <div className="edustuff">
+                    {educationArr.length > 0 && <h2>Edit Education</h2>}
+                    {educationArr.length > 0 && educationArr.map((item) => (
+                        <div className="appended" key={item.school}>
+                            <h3>{item.school +" " + "/" + " " + item.degree}</h3>
+                            <button onClick={deleteEduEntry} className="remove">Delete Entry</button>
+                        </div>
+                    ))}
                 </div>
-            </div>
-            <div className="workExp">
-                <h2 className="title">Work Experiences</h2>
-                {workArr.map((item, index) => {
-                    return (
-                        <div key={index} className="workExp__item">
-                            <div className="company_info">
-                                <h3>{item.company}</h3>
-                                <h4>{item.position}</h4>
-                                <p>{item.from} - {item.to}</p>
-                            </div>
-                            <div className="company__role">
-                                <p>{item.city}</p>
-                            </div>
-                            <div className="company__description">
-                                <p>{item.description}</p>
-                            </div>
+            </section>
 
-                    </div>
-                    )})}
-            </div>
-            <div className="eduExp">
-                <h2 className="title">Education</h2>
-                {educationArr.map((item, index) => {
-                    return (
-                        <div key={index} className="eduExp__item">
-                            <div className="edu_info">
-                                <h3>{item.school}</h3>
-                                <h4>{item.degree}</h4>
-                                <p>{item.educationStart} - {item.graduationYear}</p>
-                            </div>
-                            <div className="edu__description">
-                                <p>{item.description}</p>
-                            </div>
+            <section>
+                <h1>Check Out Your CV Below</h1>
+            </section>
 
-                    </div>
-                    )})}
-            </div>
-        </section>
+            <div>
+                <div className="renderBox">
+                    <button onClick={handlePrint}>Print As PDF</button>
+                        <CVRender
+                        nameInfo={nameInfo}
+                        emailInfo={emailInfo}
+                        phoneInfo={phoneInfo}
+                        addressInfo={addressInfo}
+                        cityInfo={cityInfo}
+                        descInfo={descInfo}
+                        currentRole={currentRole}
+                        workArr={workArr}
+                        educationArr={educationArr}
+                        />
+                
+                </div>
+        </div>
+
+           
        </>
     )
 }

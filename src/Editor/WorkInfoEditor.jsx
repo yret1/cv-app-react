@@ -20,7 +20,7 @@ const WorkInfoEditor = (props) => {
 
     const addNewCompany = (e) => {
 
-        setWorkArr((prev) => [...prev, {company, position, city, from, to, description}])
+        setWorkArr((prev) => [...prev, {company, position, from, to, description}])
     }
     return (
         <section className="work">
@@ -35,10 +35,6 @@ const WorkInfoEditor = (props) => {
                     <label className="form__box">
                         <p>Role:</p>
                         <input type="text" name="company" value={position} required placeholder="What was your role?" onChange={(e) => setPosition(e.target.value)} />
-                    </label>
-                    <label className="form__box">
-                        <p>City:</p>
-                        <input type="text" name="company" value={city} required placeholder="In what city?" onChange={(e) => setCity(e.target.value)} />
                     </label>
                     <label className="form__box">
                         <p>Started:</p>

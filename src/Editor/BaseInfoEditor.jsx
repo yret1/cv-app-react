@@ -1,12 +1,15 @@
 import "./Form.css"
 export default function BaseInfoEditor(props) {
-    const {setName, setPhone, setEmail, setAddress, setCity} = props;
+    const {setName, setPhone, setEmail, setAddress, setCity, setDesc, setRole} = props;
 
    const handleNameChange = (event) => {
     setName(event.target.value)
    }
    const handlePhoneChange = (event) => {
     setPhone(event.target.value)
+   }
+   const handleRoleChange = (event) => {
+    setRole(event.target.value)
    }
    const handleEmailChange = (event) => {
     setEmail(event.target.value)
@@ -17,6 +20,9 @@ export default function BaseInfoEditor(props) {
    const handleCityChange = (event) => {
     setCity(event.target.value)
    }
+   const handleDescChange = (event) => {
+    setDesc(event.target.value)
+   }
 
 
    const resetForm = (e) => {
@@ -26,6 +32,7 @@ export default function BaseInfoEditor(props) {
     setEmail("");
     setAddress("");
     setCity("");
+    setDesc("");
    }
 
 
@@ -54,6 +61,14 @@ export default function BaseInfoEditor(props) {
                     <label className="form__box">
                         <p>City:</p>
                         <input type="text" name="City" placeholder="City" onChange={handleCityChange}></input>
+                    </label>
+                    <label className="form__box">
+                        <p>Role:</p>
+                        <input type="text" name="City" placeholder="Current Role" onChange={handleRoleChange}></input>
+                    </label>
+                    <label className="form__box">
+                        <p>About me:</p>
+                        <textarea type="text" name="about" placeholder="Describe yourself" onChange={handleDescChange}></textarea>
                     </label>
                     <button onClick={resetForm}>Reset</button>
                 </fieldset>

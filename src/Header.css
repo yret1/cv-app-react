@@ -1,0 +1,16 @@
+.headtext {
+    font-size: 60px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #283fc4, #860a76);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+header {
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+}
